@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'ffaker'
 1000.times do
-  Product.create(name: FFaker::Product.product,
+  Product.create(name: FFaker::Name.female_name_with_prefix,
   description: FFaker::HipsterIpsum.paragraphs.join("\r\n",),
   price: rand(10.0...1000.0).round(2),
   stock: rand(1..10))
