@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(document).on("turbolinks:load",function() {
+  console.log("test")
+  $.ajax({
+    url: 'https://randomuser.me/api/?results=5000&gender=female',
+    dataType: 'json',
+    success: function(data) {
+      console.log(data.results[0].picture.large);
+      for (i = 0; i < 1001; i++) {
+      $("#chicks-"+i).append( '<img src="' + data.results[i].picture.large + '">');
+    }
+    }
+  });
+})
