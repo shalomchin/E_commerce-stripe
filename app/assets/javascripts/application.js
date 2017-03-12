@@ -23,7 +23,7 @@ $(document).on("turbolinks:load",function() {
       console.log(data.results[0].picture.large);
       for (i = 0; i < 1001; i++) {
       $("#chicks-"+i).append( '<img src="' + data.results[i].picture.large + '">');
-    }
+      }
     }
   });
 })

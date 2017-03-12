@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container-fluid">
+<div class="container-fluid"><div>
 <h1>Pick your Date</h1>
+<%= link_to 'New Product', new_product_path %>
 <div class="row">
   <% @products.each_with_index do |product, index| %>
     <div class="col-sm-4 col-md-4">
@@ -10,9 +11,10 @@
         <div class="caption">
           <h3><%= product.name %></h3>
           <p><%= product.description.truncate(100) %></p>
-          <%= product.price %> SGD/date <br>
+          <%= number_to_currency product.price %> SGD/date <br>
           <%= product.stock %> dates left
-          <p><a href="#" class="btn btn-primary" role="button">Pay</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+          <p><%= link_to "Book your date", product_path(product), class: "btn btn-primary" %>
+      <!--     <a href="#" class="btn btn-primary" role="button">Book your date</a>  -->
 
         </div>
       </div>
@@ -22,9 +24,5 @@
 </div>
 
 
-
-
-
-
-<%= link_to 'New Product', new_product_path %>
 <%= paginate(@products) %>
+</div>
