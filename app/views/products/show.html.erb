@@ -21,7 +21,12 @@
 <p>
   <strong>Stock:</strong>
   <%= @product.stock %>
+<%=  bootstrap_form_for(@product) do |f| %>
+<p>
+
+<%= f.datetime_field :reservation, label: "Reservation eg DD/MM/YY. 14:30 pm" %>
 </p>
+<% end %>
 <%= link_to 'Book', products_path, class: "btn btn-primary" %> <br><br>
 <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %> |
 <%= link_to 'Delete', product_path, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %> |
