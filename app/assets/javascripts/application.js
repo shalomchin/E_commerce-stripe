@@ -27,3 +27,14 @@ $(document).on("turbolinks:load",function() {
     }
   });
 })
+
+$(document).on("turbolinks:load",function() {
+$.ajax({
+    url: 'https://randomuser.me/api/?results=1000&gender=female',
+    dataType: 'json',
+    success: function(data) {
+      console.log(data.results[0].picture.large);
+      $("#chicks").append( '<img src="' + data.results[0].picture.large + '">');     
+    }
+  });
+})

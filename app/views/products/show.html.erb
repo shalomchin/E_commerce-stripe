@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-
+<div class = "container-fluid">
+<p>
+<span id="chicks"></span>
+</p>
 <p>
   <strong>Name:</strong>
   <%= @product.name %>
@@ -22,3 +25,4 @@
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
+<div>
