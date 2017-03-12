@@ -12,4 +12,4 @@ require 'ffaker'
   price: rand(10.0...1000.0).round(2),
   stock: rand(1..10))
 
- end
+end
