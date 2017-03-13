@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = Order.new
     # Amount in cents
   @amount = 500
 
@@ -37,17 +37,19 @@ class OrdersController < ApplicationController
     :customer    => customer.id,
     :amount      => @amount,
     :description => 'Rails Stripe customer',
-    :currency    => 'sgd'
+    :currency    => 'usd'
   )
 
-rescue Stripe::CardError => e
+  rescue Stripe::CardError => e
   flash[:error] = e.message
-  redirect_to new_order_path
-
+  
+  
+    
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
+        redirect_to product_path
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -90,3 +92,4 @@ rescue Stripe::CardError => e
       params.require(:order).permit(:product_id, :product_id)
     end
 end
+
