@@ -14,12 +14,18 @@
           <p><%= product.description.truncate(100) %></p>
           <%= number_to_currency product.price %> SGD/date <br>
           <%= product.stock %> dates left
-          <p><%= link_to "Book your date", product_path(product), class: "btn btn-primary" %>
+          <p>
+          <% if product.stock != 0 %>
+          <%= link_to "Book your date", product_path(product), class: "btn btn-primary" %>
+          <% else product.stock = 0 %>
+          <button type="button">Sold out! </button>
+            <% end %>
       <!--     <a href="#" class="btn btn-primary" role="button">Book your date</a>  -->
 
         </div>
       </div>
     </div>
+
 <% end %>
 </div>
 </div>
