@@ -25,8 +25,9 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new
+
     # Amount in cents
-  @amount = 500
+  @amount = 1000
 
   customer = Stripe::Customer.create(
     :email => params[:stripeEmail],
@@ -37,7 +38,7 @@ class OrdersController < ApplicationController
     :customer    => customer.id,
     :amount      => @amount,
     :description => 'Rails Stripe customer',
-    :currency    => 'usd'
+    :currency    => 'sgd'
   )
 
   rescue Stripe::CardError => e
