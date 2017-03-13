@@ -44,16 +44,11 @@ class OrdersController < ApplicationController
     )
 
     if @order.save!
-      puts "============="
-      puts @product.stock
-      puts "============="
+      
       @product.stock -= 1
       @product.save
-      puts "============="
-      puts @product.stock
-      puts "============="
-      puts ("HELLOOOOOO")
-      redirect_to product_path(@product.id), notice: 'Order was successfully created.'
+      
+      redirect_to product_path(@product.id), notice: "Thanks for supporting the lovely ladies. Your payment  is confirmed! You will recieve an email of your reciept."
     end
     
     # respond_to do |format|
