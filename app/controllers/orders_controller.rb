@@ -4,17 +4,20 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @product = Product.find(params[:product_id])
+    @orders = @product.orders.all
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @product = Product.find(params[:product_id])
   end
 
   # GET /orders/new
   def new
-    @order = Order.new
+    @product = Product.find(params[:product_id])
+    @order = Order.new(:product_id => @product.id)
   end
 
   # GET /orders/1/edit
@@ -48,7 +51,7 @@ class OrdersController < ApplicationController
       @product.stock -= 1
       @product.save
       
-      redirect_to product_path(@product.id), notice: "Thanks for supporting the lovely ladies. Your payment  is confirmed! You will recieve an email of your reciept."
+      redirect_to product_path(@product.id), notice: "Thanks for supporting the lovely ladies. Your payment is confirmed! You will recieve an email of your reciept."
     end
     
     # respond_to do |format|

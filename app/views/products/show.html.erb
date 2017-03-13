@@ -23,8 +23,10 @@
   <%= @product.stock %>
 
 <br>
-
+<%= render 'orders/form' %> 
+<br>
 <%= form_for [@product, Order.new] do %>
+<!-- product needs @ -->
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">

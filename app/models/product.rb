@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  has_many :orders
   validates :name, presence: true, format: { with: /[a-zA-Z.]/,
     message: "only allows letters" }, uniqueness: true
   validates :price, :format => { with: /\A(\$)?(\d+)(\.|,)?\d{0,2}?\z/  ,  message: "no alphabets allowed" }

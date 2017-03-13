@@ -13,7 +13,8 @@
           <h3><%= product.name %></h3>
           <p><%= product.description.truncate(100) %></p>
           <%= number_to_currency product.price %> SGD/date <br>
-          <%= product.stock %> dates left
+          
+          <%= pluralize(product.stock, "date") %> left
           <p>
           <% if product.stock != 0 %>
           <%= link_to "Book your date", product_path(product), class: "btn btn-primary" %>
