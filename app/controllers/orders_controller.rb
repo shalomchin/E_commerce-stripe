@@ -24,38 +24,50 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new
 
-    # Amount in cents
-  @amount = 1000
+    @order = Order.new(product_id: params[:product_id])
+    @product = Product.find(params[:product_id])
 
-  customer = Stripe::Customer.create(
-    :email => params[:stripeEmail],
-    :source  => params[:stripeToken]
-  )
+      # Amount in cents
+    @amount = @product.price * 100
 
-  charge = Stripe::Charge.create(
-    :customer    => customer.id,
-    :amount      => @amount,
-    :description => 'Rails Stripe customer',
-    :currency    => 'sgd'
-  )
+    customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+    )
 
-  rescue Stripe::CardError => e
-  flash[:error] = e.message
-  
-  
-    
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
-        redirect_to product_path
-      else
-        format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
-      end
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount.round(),
+      :description => 'Pick a Date bro',
+      :currency    => 'sgd'
+    )
+
+    if @order.save!
+      puts "============="
+      puts @product.stock
+      puts "============="
+      @product.stock -= 1
+      @product.save
+      puts "============="
+      puts @product.stock
+      puts "============="
+      puts ("HELLOOOOOO")
+      redirect_to product_path(@product.id), notice: 'Order was successfully created.'
     end
+    
+    # respond_to do |format|
+    #   if @order.save!
+        
+    #     @product.stock -= 1
+    #     @product.save
+    #     format.html { redirect_to product_path(@product.id), notice: 'Order was successfully created.' }
+    #     format.json { render :show, status: :created, location: @order }        
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @order.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /orders/1
