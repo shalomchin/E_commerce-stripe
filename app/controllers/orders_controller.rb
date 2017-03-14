@@ -11,13 +11,13 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    @product = Product.find(params[:product_id])
+    
   end
 
   # GET /orders/new
   def new
-    @product = Product.find(params[:product_id])
-    @order = Order.new(:product_id => @product.id)
+    
+    @order = Order.new
   end
 
   # GET /orders/1/edit
@@ -29,6 +29,7 @@ class OrdersController < ApplicationController
   def create
 
     @order = Order.new(product_id: params[:product_id])
+    # I don't understand this
     @product = Product.find(params[:product_id])
 
       # Amount in cents
@@ -100,7 +101,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:product_id, :product_id)
+      params.require(:order).permit(:product_id, :reservation)
     end
 end
 

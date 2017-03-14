@@ -1,4 +1,5 @@
 <%= bootstrap_form_for [@product, @order] do |f| %>
+<!-- why @order -->
    <% if @order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
@@ -18,7 +19,7 @@
   </div>   -->
 
 <div class="field">
-    <%= f.label :reservation %>
+   
     <%= f.datetime_field :reservation, label: "Reservation eg. DD/MM/YY 19:30 PM"  %>
   </div> 
   <div class="actions">

@@ -23,10 +23,12 @@
   <%= @product.stock %>
 
 <br>
-<%= render 'orders/form' %> 
-<br>
+
 <%= form_for [@product, Order.new] do %>
 <!-- product needs @ -->
+<%= bootstrap_form_for [@product, @order] do |f| %>
+<%= f.datetime_field :reservation, label: "Reservation eg. DD/MM/YY 19:30 PM"  %>
+
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">
@@ -43,6 +45,7 @@
           data-description="Pay to Play"
           data-amount= <%= @product.price*100 %>
           data-locale="auto"></script>
+<% end %>
 <% end %>
 <br>
 
