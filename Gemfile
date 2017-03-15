@@ -71,3 +71,4 @@ group :development, :test do
 end
 gem 'annotate'
 gem 'rails-controller-testing'
+gem 'metric_fu', git: 'https://github.com/bergholdt/metric_fu.git'

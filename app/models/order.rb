@@ -11,4 +11,23 @@
 
 class Order < ApplicationRecord
   belongs_to :product
+
+   def stripePayment(product, email, token)
+    # self.product_id = @product.id
+      # Amount in cents
+    @amount = product.price * 100
+
+    customer = Stripe::Customer.create(
+      :email => email,
+      :source  => token
+    )
+
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount.round(),
+      :description => 'Pick a Date bro',
+      :currency    => 'sgd'
+    )
+  end
+
 end

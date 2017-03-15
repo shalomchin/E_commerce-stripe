@@ -26,29 +26,14 @@
 <!-- form_for path  
 <form action="/submmiting_path"></form>
 -->
-<%= form_for Order.new, url: product_orders_path(@product) do %>
-<!-- product needs @ --> 
-<%= bootstrap_form_for [@product, @order] do |f| %>
-<%= f.datetime_field :reservation%>
 
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <label class="amount">
-      <span></span>
-    </label>
-  </article>
+  <!-- product needs @ --> 
+  <%= bootstrap_form_for [@product, @order] do |f| %>
+  <%= f.datetime_field :reservation%>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="Pay to Play"
-          data-amount= <%= @product.price*100 %>
-          data-locale="auto"></script>
-<% end %>
-<% end %>
+  <%= render 'payment' %>
+  <% end %>
+
 <br>
 
 <!-- <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %> |
