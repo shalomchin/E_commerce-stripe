@@ -28,10 +28,13 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
 
-    @order = Order.new(product_id: params[:product_id])
+    @order = Order.new(order_params)
+
+
     # I don't understand this
     @product = Product.find(params[:product_id])
 
+    @order.product_id = @product.id
       # Amount in cents
     @amount = @product.price * 100
 

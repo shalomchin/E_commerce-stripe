@@ -23,11 +23,13 @@
   <%= @product.stock %>
 
 <br>
-
-<%= form_for [@product, Order.new] do %>
-<!-- product needs @ -->
+<!-- form_for path  
+<form action="/submmiting_path"></form>
+-->
+<%= form_for Order.new, url: product_orders_path(@product) do %>
+<!-- product needs @ --> 
 <%= bootstrap_form_for [@product, @order] do |f| %>
-<%= f.datetime_field :reservation, label: "Reservation eg. DD/MM/YY 19:30 PM"  %>
+<%= f.datetime_field :reservation%>
 
   <article>
     <% if flash[:error].present? %>

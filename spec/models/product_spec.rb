@@ -1,22 +1,35 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  price       :decimal(, )
+#  description :text
+#  stock       :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Product, :type => :model do
   subject { Product.new(name: "Anything", description: "Anything", 
     price: "123.23", stock: 12) 
-  }
+}
 
-  it "is not valid with empty attributes" do 
+it "is not valid with empty attributes" do 
 
-   expect(Product.new).to_not be_valid
-  end
+ expect(Product.new).to_not be_valid
+end
 
-  it "is not valid without a name" do
-    subject.name = nil
-    expect(subject).to_not be_valid
-  end
+it "is not valid without a name" do
+  subject.name = nil
+  expect(subject).to_not be_valid
+end
 
-  it "is not valid without a price" do
-    subject.price = nil
+it "is not valid without a price" do
+  subject.price = nil
     # product = Product.new(price: nil)
     expect(subject).to_not be_valid
   end
@@ -26,7 +39,7 @@ RSpec.describe Product, :type => :model do
     expect(subject).to_not be_valid
   end
 
-   it "is not valid without a stock" do
+  it "is not valid without a stock" do
     subject.stock = nil
     expect(subject).to_not be_valid
   end
