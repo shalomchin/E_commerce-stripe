@@ -1,15 +1,26 @@
-class PaymentsController < 
-   def new
+class PaymentsController < ApplicationController
+  def new
     @cart = Cart.find(session[:cart_id])
     @payment = Payment.new
   end
 
   def create
     @cart = Cart.find(session[:cart_id])
-    @payment = @cart.build_payment(payment_params)
-    @payment.transaction(params[:stripeToken])
-    flash[:success] = "THANKS FOR PAYING"
-    redirect_to products_path
+    @payment = Payment.new(payment_params)
+    @payment.cart_id = @cart.id
+
+    @payment.stripePayment(@cart, params[:stripeEmail], params[:stripeToken])
+    
+    if @payment.save!
+      
+      # @product.stock -= 1
+      # @product.save
+      
+      redirect_to products_path, notice: "Thanks for supporting the lovely ladies. Your payment is confirmed! You will recieve an email of your reciept."
+    else
+      redirect_to products_path, notice: "Your order did not go through."
+    end
+
   end
 
 private

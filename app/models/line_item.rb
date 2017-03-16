@@ -1,4 +1,9 @@
 class LineItem < ApplicationRecord
-  belongs_to :product_id
-  belongs_to :cart_id
+  belongs_to :product
+  belongs_to :cart
+
+  def subtotal
+    self.product.price * self.quantity
+  end
 end
+

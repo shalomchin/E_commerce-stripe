@@ -14,6 +14,7 @@ class ProductsController < ApplicationController
   def show
 
     @order = Order.new
+    @line_item = LineItem.new
   end
 
   # GET /products/new
