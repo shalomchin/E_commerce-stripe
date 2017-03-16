@@ -1,3 +1,5 @@
+<% if @product.stock > 0 %>
+
 <article>
   <% if flash[:error].present? %>
   <div id="error_explanation">
@@ -14,3 +16,8 @@ data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
 data-description="Pay to Play"
 data-amount= <%= @product.price*100 %>
 data-locale="auto"></script>
+
+<% else %>
+  <button type="button" class="btn btn-danger" disabled>Sold out! </button>
+<% end %>
+

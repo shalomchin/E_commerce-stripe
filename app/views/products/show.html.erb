@@ -26,12 +26,15 @@
 <!-- form_for path  
 <form action="/submmiting_path"></form>
 -->
-
+<!-- form_for Order.new, url: "/products/#{@product.id}/orders" do -->
+<!-- form_for Order.new, url: product_orders_path do -->
+<!-- form_for [@product, Order.new] do -->
+<!-- form_for product_orders_path(@product) do -->
   <!-- product needs @ --> 
   <%= bootstrap_form_for [@product, @order] do |f| %>
   <%= f.datetime_field :reservation%>
 
-  <%= render 'payment' %>
+  <%= render 'orders/paymentbutton' %>
   <% end %>
 
 <br>

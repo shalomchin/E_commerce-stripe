@@ -34,15 +34,18 @@ class OrdersController < ApplicationController
     # I don't understand this
     @product = Product.find(params[:product_id])
     @order.product_id = @product.id
+    # same as @order.product_id = params[:product_id] 
 
     @order.stripePayment(@product, params[:stripeEmail], params[:stripeToken])
-
+    # redirect_to new_order_path
     if @order.save!
       
       @product.stock -= 1
       @product.save
       
       redirect_to product_path(@product.id), notice: "Thanks for supporting the lovely ladies. Your payment is confirmed! You will recieve an email of your reciept."
+    else
+      redirect_to product_path(@product.id), notice: "Your order did not go through."
     end
     
     # respond_to do |format|

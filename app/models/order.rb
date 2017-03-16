@@ -28,6 +28,11 @@ class Order < ApplicationRecord
       :description => 'Pick a Date bro',
       :currency    => 'sgd'
     )
+
+  rescue Stripe::CardError => e
+  flash[:error] = e.message
+  
+
   end
 
 end

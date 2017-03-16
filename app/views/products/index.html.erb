@@ -17,10 +17,10 @@
           <%= pluralize(product.stock, "date") %> left
           <p>
           <% if product.stock != 0 %>
-          <%= link_to "Book your date", product_path(product), class: "btn btn-primary" %>
-          <% else product.stock = 0 %>
-          <button type="button" class="btn btn-danger">Sold out! </button>
-            <% end %>
+            <%= link_to "Book your date", product_path(product), class: "btn btn-primary" %>
+            <% else product.stock = 0 %>
+            <button type="button" class="btn btn-danger">Sold out! </button>
+          <% end %>
       <!--     <a href="#" class="btn btn-primary" role="button">Book your date</a>  -->
 
         </div>
