@@ -1,3 +1,3 @@
 class Payment < ApplicationRecord
-  belongs_to :cart_id
+  belongs_to :cart
 end
