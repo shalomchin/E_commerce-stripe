@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316015936) do
+ActiveRecord::Schema.define(version: 20170316030733) do
 
   create_table "line_items", force: :cascade do |t|
     t.integer  "quantity"
-    t.string   "reservation"
-    t.integer  "product_id_id"
-    t.integer  "cart_id_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["cart_id_id"], name: "index_line_items_on_cart_id_id"
-    t.index ["product_id_id"], name: "index_line_items_on_product_id_id"
+    t.datetime "reservation"
+    t.integer  "product_id"
+    t.integer  "cart_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20170316015936) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.string   "address"
+    t.integer  "contact"
+    t.string   "email"
+    t.integer  "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_payments_on_cart_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.decimal  "price"
@@ -37,6 +47,23 @@ ActiveRecord::Schema.define(version: 20170316015936) do
     t.integer  "stock"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
