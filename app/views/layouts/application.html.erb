@@ -12,10 +12,18 @@
       <a class="navbar-brand"><%= link_to 'Pick Ye Date', products_path %></a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><%= link_to 'Home', products_path %></li>
+
       <li><%= link_to 'New Product', new_product_path %></li>
-      <li><%= link_to 'Check out', cart_path(session[:cart_id]) %></li>
-      <li><a href="#">Login</a></li>
+      <% if current_user %>
+      <li><%= link_to('Log Out', destroy_user_session_path, :method => :delete) %></li>
+      <li><%= link_to('Change Password', edit_user_registration_path) %></li>
+      <span class="log-username">Logged in as <%=  current_user.user_name  %></span>
+      <% else %>
+      <li><%= link_to('Sign Up', new_user_registration_path) %></li>
+      <li><%= link_to('Login', new_user_session_path) %></li>
+      
+      <% end %>
     </ul>
   </div>
 </nav>
