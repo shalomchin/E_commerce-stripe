@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
     @payment.stripePayment(@cart, params[:stripeEmail], params[:stripeToken])
     
     if @payment.save!
-      
+      session[:cart_id] = nil
       # @product.stock -= 1
       # @product.save
       

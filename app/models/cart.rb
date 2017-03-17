@@ -36,13 +36,11 @@ class Cart < ApplicationRecord
     self.line_items.find_by(product: product).present?
   end
 
-  # def self.find_or_create(cart_id)
-  #   if cart_id == nil
-  #     cart = Cart.create
-  #     cart_id = cart.id
-  #   else
-  #     cart = Cart.find(cart_id)
-  #   end
-  #   return cart
-  # end 
+  def self.find_or_create(cart_id)
+    if cart_id == nil
+      cart = Cart.create
+    else
+      cart = Cart.find(cart_id)
+    end
+  end 
 end  

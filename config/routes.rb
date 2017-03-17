@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   end
 
   resources :products do
-    resources :line_items
+    resources :line_items, only: [:create, :new]
   end 
+
+  resources :line_items, only: [:destroy, :update]
 
   get 'products/index'
   root 'products#index'
