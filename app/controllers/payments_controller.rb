@@ -13,8 +13,7 @@ class PaymentsController < ApplicationController
     
     if @payment.save!
       session[:cart_id] = nil
-      # @product.stock -= 1
-      # @product.save
+      @payment.deductAllStock
       
       redirect_to products_path, notice: "Thanks for supporting the lovely ladies. Your payment is confirmed! You will recieve an email of your reciept."
     else

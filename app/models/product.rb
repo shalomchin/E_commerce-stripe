@@ -19,4 +19,10 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :description, presence: true, length: { maximum: 1000, too_long: "%{count} characters is the maximum allowed" }
   validates :stock, presence: true, numericality: { only_integer: true }
+
+ def deductStock(paidStock)
+  self.stock -= (paidStock) 
+  self.save
+ end
+
 end

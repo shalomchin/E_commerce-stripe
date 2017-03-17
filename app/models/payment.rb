@@ -22,5 +22,11 @@ class Payment < ApplicationRecord
       puts "Transaction Fail"
     
   end
+
+  def deductAllStock
+    self.cart.line_items.each do |line_item|
+      line_item.lineitemDeduct
+    end  
+  end  
 end
 

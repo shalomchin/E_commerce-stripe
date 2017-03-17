@@ -18,8 +18,8 @@ class Cart < ApplicationRecord
   #   end
   # end
 
-  def stack_item(product, quantity)
-    self.item_already_exists?(product) ? increase_quantity(product,quantity) : add_item(product, quantity)
+  def stack_item(product, quantity, reservation)
+    self.add_item(product, quantity, reservation)
   end
 
   def increase_quantity(product, quantity)
@@ -28,13 +28,13 @@ class Cart < ApplicationRecord
     line_item.save!
   end
 
-  def add_item(product, quantity)
-    self.line_items.create!(product: product, quantity: quantity)
+  def add_item(product, quantity, reservation)
+    self.line_items.create!(product: product, quantity: quantity, reservation: reservation)
   end
 
-  def item_already_exists?(product)
-    self.line_items.find_by(product: product).present?
-  end
+  # def item_already_exists?(product)
+  #   self.line_items.find_by(product: product).present?
+  # end
 
   def self.find_or_create(cart_id)
     if cart_id == nil

@@ -2,7 +2,14 @@
 <%= bootstrap_form_for [@product, @line_item] do |f| %>
   <div class="row">
      <div class = "col-xs-3">
-      <%= f.number_field :quantity, min: 1, class: 'col-xs-3' %>
+      <%= f.number_field :quantity, label: "Going by yourself or with others? Extra Charges apply.", min: 1, class: 'col-xs-3' %>
+     </div>
+     <div class = "col-xs-9">   
+     </div>
+  </div>   
+  <div class="row">
+     <div class = "col-xs-3">
+      <%= f.datetime_field :reservation, label: "Reservation eg. DD/MM/YY 19:30 PM", class: 'col-xs-3' %>
      </div>
      <div class = "col-xs-9">   
      </div>

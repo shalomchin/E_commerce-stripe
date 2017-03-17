@@ -8,7 +8,7 @@ class LineItemsController < ApplicationController
     else
       @cart = Cart.find(session[:cart_id])
     end
-    @cart.stack_item(@product, params[:line_item][:quantity])
+    @cart.stack_item(@product, params[:line_item][:quantity], params[:line_item][:reservation])
     redirect_to products_path, notice: "Cart updated"
   end
 
