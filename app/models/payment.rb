@@ -1,6 +1,10 @@
 class Payment < ApplicationRecord
   belongs_to :cart
 
+  validates :address, presence: true 
+  validates :contact, presence: true, numericality: { only_integer: true }  , message: "no alphabets allowed" 
+  validates :email, presence: true
+
   def stripePayment(cart, email, token)
     
       # Amount in cents
