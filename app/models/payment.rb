@@ -1,8 +1,8 @@
 class Payment < ApplicationRecord
   belongs_to :cart
 
-  validates :address, presence: true 
-  validates :contact, presence: true, numericality: { only_integer: true }  , message: "no alphabets allowed" 
+  validates :address, presence: { message: 'please work' }
+  validates :contact, presence: true, numericality: { only_integer: true }
   validates :email, presence: true
 
   def stripePayment(cart, email, token)
